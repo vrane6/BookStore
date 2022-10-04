@@ -69,7 +69,7 @@ namespace BookStore.Domain.Services
                 return null;
             }
 
-            await _categoryRepository.Remove(category);
+            await _categoryRepository.Update(category);
             return category;
         }
     }

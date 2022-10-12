@@ -1,0 +1,15 @@
+em{
+    color: #e71515;
+}
+.ng-invalid.ng-touched{
+    border-color: red;
+}
+
+
+.form {
+    margin: 0 auto !important;
+    float: none !important;
+}
+.jumbtron {
+    padding-top: 60px;
+}

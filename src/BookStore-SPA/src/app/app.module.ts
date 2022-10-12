@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BookService } from './_services/book.service';
 import { Category } from './_models/Category';
@@ -21,6 +21,8 @@ import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { NgbdDatepickerPopup } from './datepicker/datepicker-popup';
+import { ErrorHandlerService } from './_services/shared/error-handler/error-handler.service';
+
 
 
 @NgModule({
@@ -46,7 +48,11 @@ import { NgbdDatepickerPopup } from './datepicker/datepicker-popup';
     ToastrModule.forRoot(),
 
   ],
-  providers: [BookService,Category,ConfirmationDialogService],
+  providers: [BookService,Category,ConfirmationDialogService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorHandlerService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

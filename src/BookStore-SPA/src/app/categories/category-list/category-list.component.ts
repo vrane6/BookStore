@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, Subject } from 'rxjs';
-import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 import { CategoryService } from 'src/app/_services/category.service';
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
 
@@ -49,14 +48,17 @@ export class CategoryListComponent implements OnInit {
     debugger;
     this.confirmationDialogService.confirm('Atention', 'Do you really want to delete this category?')
     
-      .then(() =>
+      .then((confirmed) =>{
+        if (confirmed == true) {
         this.service.deleteCategory(categoryId).subscribe(() => {
           this.toastr.success('The category has been deleted');
           this.getCategories();
         },
           error => {
             this.toastr.error('Failed to delete the category.');
-          }))
+          })
+        }
+      })
       .catch(() => '');
   }
 

@@ -8,13 +8,14 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-    { path: 'books', component: BookListComponent },
-    { path: 'book', component: BookComponent },
-    { path: 'book/:id', component: BookComponent },
-    { path: 'categories', component: CategoryListComponent },
-    { path: 'category', component: CategoryComponent },
-    { path: 'category/:id', component: CategoryComponent },
-    { path: '**', redirectTo: 'home', pathMatch: 'full' }
+  { path: 'books', component: BookListComponent },
+  { path: 'book', component: BookComponent },
+  { path: 'book/:id', component: BookComponent },
+  { path: 'categories', component: CategoryListComponent },
+  { path: 'category', component: CategoryComponent },
+  { path: 'category/:id', component: CategoryComponent },
+  { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookStore.API.Dtos.Book;
 using BookStore.API.Dtos.Category;
+using BookStore.API.Dtos.Registration;
 using BookStore.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace BookStore.API.Configuration
             CreateMap<Book, BookAddDto>().ReverseMap();
             CreateMap<Book, BookEditDto>().ReverseMap();
             CreateMap<Book, BookResultDto>().ReverseMap();
+
+            CreateMap<UserForRegistrationDto, User>().ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
         }
     }
 }

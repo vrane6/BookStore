@@ -50,14 +50,17 @@ export class BookListComponent implements OnInit {
 
   public deleteBook(bookId: number) {
     this.confirmationDialogService.confirm('Atention', 'Do you really want to delete this book?')
-      .then(() =>
-        this.service.deleteBook(bookId).subscribe(() => {
-          this.toastr.success('The book has been deleted');
-          this.getValues();
-        },
-          err => {
-            this.toastr.error('Failed to delete the book');
-          }))
+      .then((confirmed) => {
+        if (confirmed == true) {
+          this.service.deleteBook(bookId).subscribe(() => {
+            this.toastr.success('The book has been deleted');
+            this.getValues();
+          },
+            err => {
+              this.toastr.error('Failed to delete the book');
+            })
+        }
+      })
       .catch(() => '');
   }
 

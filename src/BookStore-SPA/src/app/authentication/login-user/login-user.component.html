@@ -1,0 +1,32 @@
+<div class="jumbtron">
+        
+        
+        <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="loginUser(loginForm.value)" autocomplete="off" class="col-md-5 form">
+            <h2 class="text-center text-primary">Login</h2>
+            <div *ngIf="showError" class="alert alert-danger" role="alert">
+                {{errorMessage}}
+            </div>
+            <div class="form-group">
+                
+                    <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username" />
+                
+                <div class="col-md-5">
+                    <em *ngIf="validateControl('username') && hasError('username', 'required')">Username is required</em>
+                </div>
+            </div>
+            <div class="form-group">
+                
+                    <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" />
+                
+                <div class="col-md-5">
+                    <em *ngIf="validateControl('password') && hasError('password', 'required')">Password is required</em>
+                </div>
+            </div>
+            <br>
+            
+            <div class="form-group text-center">
+                <button class="btn btn-success mr-2" [disabled]="!loginForm?.valid" type="submit">Login</button>
+                <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+              </div>
+        </form>
+    </div>

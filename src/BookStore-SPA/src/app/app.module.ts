@@ -23,7 +23,15 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { NgbdDatepickerPopup } from './datepicker/datepicker-popup';
 import { ErrorHandlerService } from './_services/shared/error-handler/error-handler.service';
 
+import {JwtModule} from "@auth0/angular-jwt";
+import { PrivacyComponent } from './privacy/privacy.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { MasterparameterComponent } from './masterparameters/masterparameter/masterparameter.component';
+import { MasterparameterListComponent } from './masterparameters/masterparameter-list/masterparameter-list.component'
 
+export function tokenGetter(){
+  return localStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [
@@ -35,7 +43,11 @@ import { ErrorHandlerService } from './_services/shared/error-handler/error-hand
     HomeComponent,
     NavComponent,
     ConfirmationDialogComponent,
-    NgbdDatepickerPopup
+    NgbdDatepickerPopup,
+    PrivacyComponent,
+    ForbiddenComponent,
+    MasterparameterComponent,
+    MasterparameterListComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +58,13 @@ import { ErrorHandlerService } from './_services/shared/error-handler/error-hand
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:tokenGetter,
+        allowedDomains:["localhost:5001"],
+        disallowedRoutes:[]
+      }
+    })
 
   ],
   providers: [BookService,Category,ConfirmationDialogService,{

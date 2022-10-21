@@ -1,0 +1,33 @@
+<div class="jumbtron">
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off" class="col-md-5 form">
+        <h2 class="text-center text-primary">Parameter Master</h2>
+        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formData.id">
+        <div class="form-group">
+            <input name="mp_Short_Name" #mp_Short_Name="ngModel" [(ngModel)]="formData.mp_Short_Name"
+                class="form-control" required
+                [ngClass]="{'is-invalid': form.controls['mp_Short_Name']?.invalid && form.controls['mp_Short_Name']?.touched}"
+                placeholder="Parameter Short Name">
+            <div class="invalid-feedback" *ngIf="mp_Short_Name.invalid && mp_Short_Name.touched">Please inform the short
+                name.</div>
+        </div>
+        <div class="form-group">
+            <input name="mp_Name" #mp_Name="ngModel" [(ngModel)]="formData.mp_Name" class="form-control" required
+                [ngClass]="{'is-invalid': form.controls['mp_Name']?.invalid && form.controls['mp_Name']?.touched}"
+                placeholder="Parameter Name">
+            <div class="invalid-feedback" *ngIf="mp_Name.invalid && mp_Name.touched">Please inform the parameter name.
+            </div>
+        </div>
+        <!-- Checked checkbox -->
+        <div class="form-check">
+            <input name="mp_ComboList" #mp_ComboList="ngModel" [(ngModel)]="formData.mp_ComboList" class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+               />
+               <label class="form-check-label" for="flexCheckDefault">
+                IsCombo
+              </label>
+        </div>
+        <div class="form-group text-center">
+            <button class="btn btn-success mr-2" [disabled]="form.invalid" type="submit">Save</button>
+            <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

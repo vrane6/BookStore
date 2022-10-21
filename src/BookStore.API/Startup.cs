@@ -50,9 +50,9 @@ namespace BookStore.API
 
             services.AddIdentity<User, IdentityRole>(opt =>
             {
-                /*opt.Password.RequiredLength = 7;
+                opt.Password.RequiredLength = 7;
                 opt.Password.RequireDigit = false;
-                opt.User.RequireUniqueEmail = true;*/
+                opt.User.RequireUniqueEmail = true;
             })
                 .AddEntityFrameworkStores<BookStoreDbContext>();
 
@@ -83,6 +83,10 @@ namespace BookStore.API
             });
 
             services.AddScoped<JwtHandler>();
+
+            //var emailConfig = Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            //services.AddSingleton(emailConfig);
+            //services.AddScoped<IEmailSender, EmailSender>();
 
 
         }

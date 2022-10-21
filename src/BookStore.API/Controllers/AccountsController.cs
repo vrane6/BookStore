@@ -3,6 +3,7 @@ using BookStore.API.Dtos.Login;
 using BookStore.API.Dtos.Registration;
 using BookStore.API.JwtFeatures;
 using BookStore.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,7 @@ namespace BookStore.API.Controllers
 
                 return BadRequest(new RegistrationResponseDto { Errors = errors });
             }
-
+            await _userManager.AddToRoleAsync(user, "Viewer");
             return StatusCode(201);
         }
 
@@ -57,10 +58,19 @@ namespace BookStore.API.Controllers
             if (user == null || !checkPassword)
                 return Unauthorized(new AuthResponseDto { ErrorMessage = "Invalid Authentication" });
             var signingCredentials = _jwtHandler.GetSigningCredentials();
-            var claims = _jwtHandler.GetClaims(user);
+            var claims = await _jwtHandler.GetClaims(user);
             var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token });
+        }
+        [HttpGet("Privacy")]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Privacy()
+        {
+            var claims = User.Claims
+                .Select(c => new { c.Type, c.Value })
+                .ToList();
+            return Ok(claims);
         }
     }
 }

@@ -63,7 +63,7 @@ export class RegisterUserComponent implements OnInit {
       .subscribe({
         next: (_) => {
           this.toastr.success('Registration successful');
-            this.router.navigate(['authentication/register'])
+            this.router.navigate(['/authentication/login'])
         },
         error: (err: HttpErrorResponse) => {
           this.errorMessage = err.message;

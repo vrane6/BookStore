@@ -2,6 +2,7 @@
 using BookStore.API.Dtos.Book;
 using BookStore.Domain.Interfaces;
 using BookStore.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace BookStore.API.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     public class BookController : MainController
     {
         private readonly IMapper _mapper;

@@ -1,10 +1,22 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-    <a class="navbar-brand" [routerLink]="['/home']">BookStore</a>
-
-    <ul class="navbar-nav mr-auto">
-        <a class="nav-link" [routerLink]="['/books']">Books</a>
-        <a class="nav-link" [routerLink]="['/categories']">Categories</a>
-        <a class="nav-link"[routerLink]="['/authentication/register']" routerLinkActive="active" 
-              [routerLinkActiveOptions]="{exact: true}">Register</a>
-    </ul>
+  <a class="navbar-brand" [routerLink]="['/home']">EDP</a>
+  <!-- !isUserAuthenticated TESTING -->
+  <ul  class="navbar-nav mr-auto">
+    <a class="nav-link" [routerLink]="['/books']">Books</a>
+    <a class="nav-link" [routerLink]="['/categories']">Categories</a>
+    <a class="nav-link" [routerLink]="['/masterparameters']">Masterparameters</a>
+    <a class="nav-link" [routerLink]="['/authentication/login']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">Login</a>
+    <a class="nav-link" [routerLink]="['/authentication/register']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">Register</a>
+    <a class="nav-link" [routerLink]="['/privacy']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      Privacy </a>
+  </ul>
+  <div> 
+  <ul *ngIf='isUserAuthenticated' class="navbar-nav mr-auto mt-2 mt-lg-0">
+    <li class="nav-item">
+      <button class="btn btn-link" style="color: #ffffff80;" (click)="logout()">Logout</button>
+    </li>
+  </ul>
+</div>
 </nav>

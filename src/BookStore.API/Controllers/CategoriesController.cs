@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace BookStore.API.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class CategoriesController : MainController
     {
         private readonly IMapper _mapper;

@@ -69,6 +69,29 @@ namespace BookStore.Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("BookStore.Domain.Models.Masterparameters", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Mp_ComboList")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Mp_Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("Mp_Short_Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Masterparameters");
+                });
+
             modelBuilder.Entity("BookStore.Domain.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -165,6 +188,22 @@ namespace BookStore.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "84692c4b-313c-44e5-97ce-b1aaa3c59db3",
+                            ConcurrencyStamp = "6162154e-71b3-484c-8edd-8fc4d0353279",
+                            Name = "Viewer",
+                            NormalizedName = "VIEWER"
+                        },
+                        new
+                        {
+                            Id = "dcd9480e-dee1-4118-aa60-8c3c75ffe505",
+                            ConcurrencyStamp = "d92b3e1b-ab24-4448-b25e-979fdc5cce28",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

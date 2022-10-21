@@ -2,6 +2,7 @@
 using BookStore.Domain.Services;
 using BookStore.Infrastructure.Context;
 using BookStore.Infrastructure.Repositories;
+using MasterparametersStore.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ namespace BookStore.API.Configuration
             services.AddScoped<BookStoreDbContext>();
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IBookRepository, BookRepository>();
-
             services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IBookService, BookService>();
 
+            services.AddScoped<IMasterparametersRepository, MasterparameterRepository>();
+            services.AddScoped<IMasterparametersService, MasterparameterService>();
 
 
             return services;

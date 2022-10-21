@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BookStore.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -14,11 +15,13 @@ namespace BookStore.API.JwtFeatures
     public class JwtHandler
     {
         private readonly IConfiguration _configuration;
+        private readonly UserManager<User> _userManager;
         private readonly IConfigurationSection _jwtSettings;
 
-        public JwtHandler(IConfiguration configuration)
+        public JwtHandler(IConfiguration configuration,UserManager<User> userManager)
         {
             _configuration = configuration;
+            _userManager = userManager;
             _jwtSettings = _configuration.GetSection("JWTSettings");
         }
 
@@ -29,12 +32,18 @@ namespace BookStore.API.JwtFeatures
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        public List<Claim> GetClaims(IdentityUser user)
+        public async Task<List<Claim>> GetClaims(User user)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name,user.Email)
             };
+
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach(var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             return claims;
         }
